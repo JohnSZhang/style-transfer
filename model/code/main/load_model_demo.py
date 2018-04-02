@@ -111,10 +111,11 @@ class Demo:
 
         sequences_input = pad_sequences(all_txt_indexed, maxlen=config.max_input_seq_length, padding='pre', truncating='post')
 
-        decoder_outputs_inference, _ = self.rnn_model.solveAll(self.params, sequences_input,
-                None, self.preprocessing.idx_to_word, sess=self.sess, inference_type=self.inference_type, print_progress=False)
+        decoder_outputs_inference, _, alpha = self.rnn_model.solveAll(self.params, sequences_input,
+                None, self.preprocessing.idx_to_word, sess=self.sess, inference_type=self.inference_type, print_progress=False
+                , return_alpha= True)
 
-        all_texts = ''
+        text_outputs = []
         for output in decoder_outputs_inference:
             s = []
             ended = False
@@ -125,10 +126,26 @@ class Demo:
                 else:
                     ended = True
 
-            all_texts += ' '.join(s) + ' '
+            text_outputs.append(' '.join(s))
 
-        print 'all texts', all_texts
+        return text_outputs, alpha
 
-        return all_texts
+
+        # all_texts = ''
+        # for output in decoder_outputs_inference:
+        #     s = []
+        #     ended = False
+        #     output = self.preprocessing.fromIdxSeqToVocabSeq(output)
+        #     for i,word in enumerate(output):
+        #         if word !="sentend" and not ended:
+        #             s.append(word)
+        #         else:
+        #             ended = True
+        #
+        #     all_texts += ' '.join(s) + ' '
+        #
+        # print 'all texts', all_texts
+        #
+        # return all_texts
 
 

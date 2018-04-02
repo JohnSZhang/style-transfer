@@ -217,7 +217,7 @@ class Solver:
     ###################################################################################
 
     def solveAll(self, config, encoder_inputs, decoder_ground_truth_outputs, reverse_vocab, sess=None,
-                 print_progress=True, inference_type="greedy"): # sampling
+                 print_progress=True, inference_type="greedy", return_alpha=False): # sampling
 
         if print_progress:
             print " SolveAll ...... ============================================================"
@@ -267,8 +267,10 @@ class Solver:
                 import pickle
                 pickle.dump(alpha, open("alpha.p", "wb"))
                 print "Dumped alphas"
-
-        return decoder_outputs_inference, decoder_ground_truth_outputs
+        if return_alpha:
+            return decoder_outputs_inference, decoder_ground_truth_outputs, alpha
+        else:
+            return decoder_outputs_inference, decoder_ground_truth_outputs
 
     ###################################################################################
 

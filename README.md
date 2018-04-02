@@ -10,7 +10,7 @@ To run the server, follow the below steps:
 a preprocessing object of your preprocessed text, and the word embedding used by
 the model (and modify model/code/main/load_model_demo.py accordingly).
 * Install Flask locally, from the root dir run 
-`$ export FLASK_APP=server.py`
+`export FLASK_APP=server.py`
 and 
 `flask run`
 
