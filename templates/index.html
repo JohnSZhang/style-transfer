@@ -30,7 +30,7 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
       <div class="container">
-        <a class="navbar-brand js-scroll-trigger" href="#page-top">Writing Fool/a>
+        <a class="navbar-brand js-scroll-trigger" href="#page-top">Writing Fool</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           Menu
           <i class="fa fa-bars"></i>
@@ -44,7 +44,7 @@
               <a class="nav-link js-scroll-trigger" href="#tool">Writing Fool</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="#portfolio">Generated Story</a>
+              <a class="nav-link js-scroll-trigger" href="#portfolio">Examples</a>
             </li>
             <li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="#about">About</a>
@@ -62,7 +62,7 @@
       <div class="container">
         <div class="intro-text">
           <div class="intro-lead-in">Hi There!</div>
-          <div class="intro-heading text-uppercase">Ever Wanted to Write Like Authors of Yore?</div>
+          <div class="intro-heading text-uppercase">Want to Write Like Great Authors of Yore?</div>
           <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="#services">Tell Me More</a>
         </div>
       </div>
@@ -73,7 +73,7 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-12 text-center">
-            <h2 class="section-heading text-uppercase">Services</h2>
+            <h2 class="section-heading text-uppercase">What is the writing fool?</h2>
             <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
           </div>
         </div>
@@ -83,7 +83,7 @@
               <i class="fa fa-circle fa-stack-2x text-primary"></i>
               <i class="fa fa-shopping-cart fa-stack-1x fa-inverse"></i>
             </span>
-            <h4 class="service-heading">E-Commerce</h4>
+            <h4 class="service-heading">Totally Free</h4>
             <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
           </div>
           <div class="col-md-4">
@@ -91,7 +91,7 @@
               <i class="fa fa-circle fa-stack-2x text-primary"></i>
               <i class="fa fa-laptop fa-stack-1x fa-inverse"></i>
             </span>
-            <h4 class="service-heading">Responsive Design</h4>
+            <h4 class="service-heading">Over the Internet</h4>
             <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
           </div>
           <div class="col-md-4">
@@ -99,7 +99,7 @@
               <i class="fa fa-circle fa-stack-2x text-primary"></i>
               <i class="fa fa-lock fa-stack-1x fa-inverse"></i>
             </span>
-            <h4 class="service-heading">Web Security</h4>
+            <h4 class="service-heading">Secure Writing</h4>
             <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
           </div>
         </div>
@@ -111,7 +111,7 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-12 text-center">
-            <h2 class="section-heading text-uppercase">Try it Out!</h2>
+            <h2 class="section-heading text-uppercase">Try it for yourself!</h2>
             <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
           </div>
         </div>
@@ -126,12 +126,20 @@
                 <p class="help-block text-danger"></p>
               </div>
             </div>
-            <div class="row text-center">
-            </div>
             <div class="clearfix"></div>
             <div class="col-lg-12 text-center">
             <div id="success"></div>
             <button id="sendMessageButton" class="btn btn-primary btn-xl text-uppercase" type="submit">Stylize It!</button>
+            </div>
+            <div class="row">
+              <div class="col-lg-12">
+                <h3 class="section-heading text-uppercase" style="margin-top: 25px; text-align: left;">Stylized Output:</h3>
+              </div>
+              <div class="col-lg-12 text-left">
+               <p class="text-muted" id="output">
+
+               </p>
+              </div>
             </div>
           </form>
         </div>
@@ -324,7 +332,7 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-12 text-center">
-            <h2 class="section-heading text-uppercase">Meet The Team!/h2>
+            <h2 class="section-heading text-uppercase">Meet The Team!</h2>
             <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
           </div>
         </div>
@@ -332,8 +340,8 @@
           <div class="col-sm-4">
             <div class="team-member">
               <img class="mx-auto rounded-circle" src="{{ url_for('static', filename='img/team/1.jpg')}}" alt="">
-              <h4>Kay Garland</h4>
-              <p class="text-muted">Lead Designer</p>
+              <h4>Person 1</h4>
+              <p class="text-muted">Author</p>
               <ul class="list-inline social-buttons">
                 <li class="list-inline-item">
                   <a href="#">
@@ -356,8 +364,8 @@
           <div class="col-sm-4">
             <div class="team-member">
               <img class="mx-auto rounded-circle" src="{{ url_for('static', filename='img/team/2.jpg')}}" alt="">
-              <h4>Larry Parker</h4>
-              <p class="text-muted">Lead Marketer</p>
+              <h4>Person 2</h4>
+              <p class="text-muted">Author</p>
               <ul class="list-inline social-buttons">
                 <li class="list-inline-item">
                   <a href="#">
@@ -380,8 +388,8 @@
           <div class="col-sm-4">
             <div class="team-member">
               <img class="mx-auto rounded-circle" src="{{ url_for('static', filename='img/team/3.jpg')}}" alt="">
-              <h4>Diana Pertersen</h4>
-              <p class="text-muted">Lead Developer</p>
+              <h4>Person 3</h4>
+              <p class="text-muted">Author</p>
               <ul class="list-inline social-buttons">
                 <li class="list-inline-item">
                   <a href="#">
@@ -419,23 +427,7 @@
             <span class="copyright">Copyright &copy; Your Website 2018</span>
           </div>
           <div class="col-md-4">
-            <ul class="list-inline social-buttons">
-              <li class="list-inline-item">
-                <a href="#">
-                  <i class="fa fa-twitter"></i>
-                </a>
-              </li>
-              <li class="list-inline-item">
-                <a href="#">
-                  <i class="fa fa-facebook"></i>
-                </a>
-              </li>
-              <li class="list-inline-item">
-                <a href="#">
-                  <i class="fa fa-linkedin"></i>
-                </a>
-              </li>
-            </ul>
+
           </div>
           <div class="col-md-4">
             <ul class="list-inline quicklinks">

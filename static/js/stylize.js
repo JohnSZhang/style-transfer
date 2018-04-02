@@ -19,7 +19,8 @@ $(function() {
           text: message
         },
         cache: false,
-        success: function() {
+        success: function(output) {
+          $('#output').text(output);
           // Success message
           $('#success > .alert-success')
             .append("<strong>Your message has been sent. </strong>");
