@@ -86,8 +86,10 @@ def inference():
         print 'new text input:', text_input
         text_output, alpha = demo.getOutput(text_input)
         outputs = copy_mechanism(text_input, text_output, alpha)
-        return ('').join(outputs)
+        return ('\n').join(outputs)
 
+if __name__ == 'main':
+    app.run(host='128.61.105.147', port=80)
 
 
 
