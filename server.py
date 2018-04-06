@@ -12,8 +12,6 @@ demo = Demo()
 demo.loadModel("data/pointer_model7.ckpt")
 
 
-
-
 def padUp(line,finalLength,paddingMethod):
     words=line.split()
     words=["<s>",]+words+["</s>",]
@@ -94,7 +92,9 @@ def inference():
 
 
 if __name__ == '__main__':
-    app.run(host='128.61.105.147', port=5000)
+    # Uncomment below line if hosting
+    # app.run(host='YOUR IP HERE', port=5000)
+    app.run()
 
 
 

@@ -126,8 +126,8 @@ def convert_to_seed(text, unique_chars):
     return np.array([np.vstack(letters)])
 
 
-def restore_model(path):
-    text = read_data(path+'shakespeare.txt')
+def restore_model(file_path, model_path):
+    text = read_data(file_path)
     train_data, target_data, unique_chars, len_unique_chars = featurize(text)
     x = tf.placeholder("float", [None, max_len, len_unique_chars])
     y = tf.placeholder("float", [None, len_unique_chars])
@@ -144,7 +144,7 @@ def restore_model(path):
     saver = tf.train.Saver()
     sess = tf.Session(config = config)
     sess.run(init_op)
-    saver.restore(sess, path+"tmp/rnn_model59.ckpt")
+    saver.restore(sess, model_path)
 
     return unique_chars, prediction, sess, x, len_unique_chars
 
