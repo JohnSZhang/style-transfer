@@ -5,10 +5,14 @@ from flask import request
 from model.code.main.load_model_demo import PreProcessing as prepro
 from model.code.main.load_model_demo import Demo
 
+
 app = Flask(__name__)
 
 demo = Demo()
 demo.loadModel("data/pointer_model7.ckpt")
+
+
+
 
 def padUp(line,finalLength,paddingMethod):
     words=line.split()
@@ -88,8 +92,9 @@ def inference():
         outputs = copy_mechanism(text_input, text_output, alpha)
         return ('\n').join(outputs)
 
-if __name__ == 'main':
-    app.run(host='128.61.105.147', port=80)
+
+if __name__ == '__main__':
+    app.run(host='128.61.105.147', port=5000)
 
 
 
