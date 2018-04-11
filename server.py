@@ -1,16 +1,23 @@
 from flask import Flask
 from flask import render_template
 from flask import request
+import tensorflow as tf
 
 from model.code.main.load_model_demo import PreProcessing as prepro
 from model.code.main.load_model_demo import Demo
-
+from model.rnn_shakespeare import predict, restore_model
 
 app = Flask(__name__)
 
-demo = Demo()
-demo.loadModel("data/pointer_model7.ckpt")
+g1 = tf.Graph()
+g2 = tf.Graph()
 
+with g1.as_default():
+    demo = Demo()
+    demo.loadModel("data/pointer_model7.ckpt")
+with g2.as_default():
+    unique_chars, predictions, sess, x, len_unique_chars = restore_model('./model/shakespeare.txt',
+                                                                         './model/tmp/rnn_model59.ckpt')
 
 def padUp(line,finalLength,paddingMethod):
     words=line.split()
@@ -91,10 +98,19 @@ def inference():
         return ('\n').join(outputs)
 
 
+@app.route('/complete', methods=['POST'])
+def complete():
+    if request.method == 'POST':
+        print 'received post'
+        text_input = request.form['text']
+        text_output = predict(text_input, unique_chars, predictions, sess, x, len_unique_chars)
+        return text_output
+
+
 if __name__ == '__main__':
     # Uncomment below line if hosting
-    # app.run(host='YOUR IP HERE', port=5000)
-    app.run()
+    app.run(host='128.61.105.147', port=5000)
+    # app.run()
 
 
 
