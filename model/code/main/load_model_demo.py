@@ -21,7 +21,7 @@ data_src = config.data_dir
 
 class Demo:
 
-    def loadModel(self, saved_model_path, inference_type="greedy"):
+    def loadModel(self, saved_model_path, inference_type="greedy", preprocess_path = data_src):
 
         # params
         params = {}
@@ -45,7 +45,7 @@ class Demo:
         params['use_context_for_out'] = config.use_context_for_out
         params['batch_size'] = 32
 
-        preprocessing = pickle.load(open(data_src + "preprocessing.obj","r") )
+        preprocessing = pickle.load(open(preprocess_path + "preprocessing.obj","r") )
 
         params['vocab_size'] = preprocessing.vocab_size
         params['preprocessing'] = preprocessing
@@ -53,7 +53,7 @@ class Demo:
         params['saved_model_path'] = saved_model_path
 
         if params['pretrained_embeddings']:
-            pretrained_embeddings = pickle.load(open(params['pretrained_embeddings_path'],"r"))
+            pretrained_embeddings = pickle.load(open(preprocess_path + 'retrofitted_external_192_startend.p',"r"))
             word_to_idx = preprocessing.word_to_idx
             encoder_embedding_matrix = np.random.rand( params['vocab_size'], params['embeddings_dim'] )
             decoder_embedding_matrix = np.random.rand( params['vocab_size'], params['embeddings_dim'] )

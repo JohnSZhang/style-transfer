@@ -11,13 +11,27 @@ app = Flask(__name__)
 
 g1 = tf.Graph()
 g2 = tf.Graph()
+g3 = tf.Graph()
+g4 = tf.Graph()
 
 with g1.as_default():
-    demo = Demo()
-    demo.loadModel("data/pointer_model7.ckpt")
+    shakespeare_style_model = Demo()
+    shakespeare_style_model.loadModel("./data/style_transfer/shakespeare/pointer_model7.ckpt",
+                                      preprocess_path="./data/style_transfer/shakespeare/")
+    # demo.loadModel("data/pointer_model7.ckpt")
+    # demo.loadModel("data/p_and_p/pointer_model10.ckpt")
 with g2.as_default():
-    unique_chars, predictions, sess, x, len_unique_chars = restore_model('./model/shakespeare.txt',
-                                                                         './model/tmp/rnn_model59.ckpt')
+    shakespeare_text_data = restore_model('./data/predictive_models/shakespeare/shakespeare.txt',
+                                          './data/predictive_models/shakespeare/rnn_model59.ckpt')
+# with g3.as_default():
+#     austen_style_model = Demo()
+#     austen_style_model.loadModel("./data/style_transfer/austen/pointer_model10.ckpt",
+#                                  preprocess_path="./data/style_transfer/austen/")
+
+with g4.as_default():
+    austen_text_data = restore_model('./data/predictive_models/austen/p_and_p.txt',
+                                    './data/predictive_models/austen/rnn_model29.ckpt')
+
 
 def padUp(line,finalLength,paddingMethod):
     words=line.split()
@@ -93,7 +107,7 @@ def inference():
         text_input = request.form['text']
         text_input = text_input.split("\n")
         print 'new text input:', text_input
-        text_output, alpha = demo.getOutput(text_input)
+        text_output, alpha = shakespeare_style_model.getOutput(text_input)
         outputs = copy_mechanism(text_input, text_output, alpha)
         return ('\n').join(outputs)
 
@@ -103,6 +117,7 @@ def complete():
     if request.method == 'POST':
         print 'received post'
         text_input = request.form['text']
+        unique_chars, predictions, sess, x, len_unique_chars = shakespeare_text_data
         text_output = predict(text_input, unique_chars, predictions, sess, x, len_unique_chars)
         return text_output
 
