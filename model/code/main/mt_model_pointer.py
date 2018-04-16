@@ -12,6 +12,7 @@ class RNNModel:
         #print "========== INIT ============= "
         self.use_pointer = params['use_pointer']
         self.use_reverse_encoder = params['use_reverse_encoder']
+        self.params = params
 
         if mode == 'training':
 
@@ -84,8 +85,14 @@ class RNNModel:
 
         token_vocab_size = config['vocab_size']
         max_sentence_length = config['max_input_seq_length'] # max sequene length of encoder
-        embeddings_dim = config['embeddings_dim']
-        lstm_cell_size = config['lstm_cell_size']
+        if self.params['embeddings_dim']:
+            embeddings_dim = self.params['embeddings_dim']
+        else:
+            embeddings_dim = config['embeddings_dim']
+        if self.params['lstm_cell_size']:
+            lstm_cell_size = self.params['lstm_cell_size']
+        else:
+            lstm_cell_size = config['lstm_cell_size']
 
         #placeholders
         if mode == 'training':
@@ -357,8 +364,16 @@ class RNNModel:
 
         token_vocab_size = config['vocab_size']
         max_sentence_length = config['max_output_seq_length']
-        embeddings_dim = config['embeddings_dim']
-        lstm_cell_size = config['lstm_cell_size']
+
+        if self.params['embeddings_dim']:
+            embeddings_dim = self.params['embeddings_dim']
+        else:
+            embeddings_dim = config['embeddings_dim']
+        if self.params['lstm_cell_size']:
+            lstm_cell_size = self.params['lstm_cell_size']
+        else:
+            lstm_cell_size = config['lstm_cell_size']
+
         if mode=="inference":
             pass
 

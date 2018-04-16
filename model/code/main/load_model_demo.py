@@ -21,12 +21,13 @@ data_src = config.data_dir
 
 class Demo:
 
-    def loadModel(self, saved_model_path, inference_type="greedy", preprocess_path = data_src):
+    def loadModel(self, saved_model_path, inference_type="greedy", preprocess_path = data_src, embed_name = "", cell_size = 192):
 
         # params
         params = {}
-        params['embeddings_dim'] =  config.embeddings_dim
-        params['lstm_cell_size'] = config.lstm_cell_size
+        params['embeddings_dim'] = cell_size
+        params['lstm_cell_size'] = cell_size
+        print 'cell size', cell_size
         params['max_input_seq_length'] = config.max_input_seq_length
         params['max_output_seq_length'] = config.max_output_seq_length-1 #inputs are all but last element, outputs are al but first element
         params['batch_size'] = config.batch_size
@@ -53,10 +54,11 @@ class Demo:
         params['saved_model_path'] = saved_model_path
 
         if params['pretrained_embeddings']:
-            pretrained_embeddings = pickle.load(open(preprocess_path + 'retrofitted_external_192_startend.p',"r"))
+            # pretrained_embeddings = pickle.load(open(preprocess_path + 'retrofitted_external_192_startend.p',"r"))
+            pretrained_embeddings = pickle.load(open(preprocess_path + embed_name,"r"))
             word_to_idx = preprocessing.word_to_idx
-            encoder_embedding_matrix = np.random.rand( params['vocab_size'], params['embeddings_dim'] )
-            decoder_embedding_matrix = np.random.rand( params['vocab_size'], params['embeddings_dim'] )
+            encoder_embedding_matrix = np.random.rand( params['vocab_size'], cell_size )
+            decoder_embedding_matrix = np.random.rand( params['vocab_size'], cell_size )
             not_found_count = 0
             for token,idx in word_to_idx.items():
                 if token in pretrained_embeddings:

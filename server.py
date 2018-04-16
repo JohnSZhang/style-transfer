@@ -17,20 +17,22 @@ g4 = tf.Graph()
 with g1.as_default():
     shakespeare_style_model = Demo()
     shakespeare_style_model.loadModel("./data/style_transfer/shakespeare/pointer_model7.ckpt",
-                                      preprocess_path="./data/style_transfer/shakespeare/")
-    # demo.loadModel("data/pointer_model7.ckpt")
-    # demo.loadModel("data/p_and_p/pointer_model10.ckpt")
+                                      preprocess_path="./data/style_transfer/shakespeare/",
+                                      embed_name = 'retrofitted_external_192_startend.p',
+                                      cell_size = 192)
 with g2.as_default():
     shakespeare_text_data = restore_model('./data/predictive_models/shakespeare/shakespeare.txt',
                                           './data/predictive_models/shakespeare/rnn_model59.ckpt')
 # with g3.as_default():
 #     austen_style_model = Demo()
 #     austen_style_model.loadModel("./data/style_transfer/austen/pointer_model10.ckpt",
-#                                  preprocess_path="./data/style_transfer/austen/")
-
-with g4.as_default():
-    austen_text_data = restore_model('./data/predictive_models/austen/p_and_p.txt',
-                                    './data/predictive_models/austen/rnn_model29.ckpt')
+#                                  preprocess_path="./data/style_transfer/austen/",
+#                                  embed_name = 'retrofitted_external_192_startend.p',
+#                                  cell_size = 192)
+#
+# with g4.as_default():
+#     austen_text_data = restore_model('./data/predictive_models/austen/p_and_p.txt',
+#                                     './data/predictive_models/austen/rnn_model29.ckpt')
 
 
 def padUp(line,finalLength,paddingMethod):
@@ -124,8 +126,8 @@ def complete():
 
 if __name__ == '__main__':
     # Uncomment below line if hosting
-    app.run(host='128.61.105.147', port=5000)
-    # app.run()
+    # app.run(host='128.61.105.147', port=5000)
+    app.run()
 
 
 
