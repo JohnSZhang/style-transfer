@@ -1,5 +1,7 @@
 import tensorflow as tf
 import numpy as np
+import codecs
+import unicodedata
 
 #set hyperparameters
 max_len = 40
@@ -14,8 +16,13 @@ def read_data(file_name):
     '''
      open and read text file
     '''
-    text = open(file_name, 'r').read()
+    text = codecs.open(file_name, encoding='utf-8', mode='r').read()
+    text = unicodedata.normalize('NFKD', text).encode('ascii', 'ignore')
+    text = text.replace("*", "")
+    text = text.replace("_", "")
+    text = text.replace("-", "")
     return text.lower()
+
 
 def featurize(text):
     '''

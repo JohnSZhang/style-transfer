@@ -13,27 +13,38 @@ g1 = tf.Graph()
 g2 = tf.Graph()
 g3 = tf.Graph()
 g4 = tf.Graph()
+g5 = tf.Graph()
+g6 = tf.Graph()
 
-with g1.as_default():
-    shakespeare_style_model = Demo()
-    shakespeare_style_model.loadModel("./data/style_transfer/shakespeare/pointer_model7.ckpt",
-                                      preprocess_path="./data/style_transfer/shakespeare/",
-                                      embed_name = 'retrofitted_external_192_startend.p',
-                                      cell_size = 192)
-with g2.as_default():
-    shakespeare_text_data = restore_model('./data/predictive_models/shakespeare/shakespeare.txt',
-                                          './data/predictive_models/shakespeare/rnn_model59.ckpt')
-# with g3.as_default():
-#     austen_style_model = Demo()
-#     austen_style_model.loadModel("./data/style_transfer/austen/pointer_model10.ckpt",
-#                                  preprocess_path="./data/style_transfer/austen/",
-#                                  embed_name = 'retrofitted_external_192_startend.p',
-#                                  cell_size = 192)
-#
-# with g4.as_default():
-#     austen_text_data = restore_model('./data/predictive_models/austen/p_and_p.txt',
-#                                     './data/predictive_models/austen/rnn_model29.ckpt')
 
+# with g1.as_default():
+    # style_model = Demo()
+    # style_model.loadModel("./data/style_transfer/shakespeare/pointer_model7.ckpt",
+    #                                   preprocess_path="./data/style_transfer/shakespeare/",
+    #                                   embed_name = 'retrofitted_external_192_startend.p',
+    #                                   cell_size = 192)
+# with g2.as_default():
+#     text_data= restore_model('./data/predictive_models/shakespeare/shakespeare.txt',
+#                                           './data/predictive_models/shakespeare/rnn_model59.ckpt')
+with g3.as_default():
+    style_model= Demo()
+    style_model.loadModel("./data/style_transfer/austen/pointer_model9.ckpt",
+                                 preprocess_path="./data/style_transfer/austen/",
+                                 embed_name = 'retrofitted_external_192_startend.p',
+                                 cell_size = 192)
+
+with g4.as_default():
+    text_data = restore_model('./data/predictive_models/austen/p_and_p.txt',
+                                    './data/predictive_models/austen/rnn_model59.ckpt')
+
+# with g5.as_default():
+#     style_model = Demo()
+#     style_model.loadModel("./data/style_transfer/chaucer/pointer_model3.ckpt",
+#                                   preprocess_path="./data/style_transfer/chaucer/",
+#                                   embed_name = 'vectors_original_192_formatted.p', cell_size = 192)
+# with g6.as_default():
+#     text_data = restore_model('./data/predictive_models/chaucer/chaucer.txt',
+#                                           './data/predictive_models/chaucer/rnn_model29.ckpt')
 
 def padUp(line,finalLength,paddingMethod):
     words=line.split()
@@ -109,7 +120,7 @@ def inference():
         text_input = request.form['text']
         text_input = text_input.split("\n")
         print 'new text input:', text_input
-        text_output, alpha = shakespeare_style_model.getOutput(text_input)
+        text_output, alpha = style_model.getOutput(text_input)
         outputs = copy_mechanism(text_input, text_output, alpha)
         return ('\n').join(outputs)
 
@@ -119,7 +130,7 @@ def complete():
     if request.method == 'POST':
         print 'received post'
         text_input = request.form['text']
-        unique_chars, predictions, sess, x, len_unique_chars = shakespeare_text_data
+        unique_chars, predictions, sess, x, len_unique_chars = text_data
         text_output = predict(text_input, unique_chars, predictions, sess, x, len_unique_chars)
         return text_output
 
